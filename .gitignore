@@ -38,3 +38,5 @@ coverage/
 
 # Parcel / Webpack cache
 .cache/
+
+*storybook.log
