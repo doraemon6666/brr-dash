@@ -17,9 +17,9 @@ import { NavigationItem,MainLayoutProps,ToolpadRouter } from '../types/layout'
 const menuItems : NavigationItem[] = [
   { segment: '', title: 'Dashboard', icon: <HomeIcon /> },
   { segment: 'staff', title: 'Staff', icon: <PeopleIcon /> },
+  { segment: 'itRequest', title: 'IT Request', icon: <AssignmentIcon /> },
   { segment: 'tickets', title: 'Tickets', icon: <AssignmentIcon /> },
   { segment: 'todo', title: 'To-Do', icon: <AssignmentIcon /> },
-  { segment: 'request', title: 'IT Request', icon: <AssignmentIcon /> },
 ];
 
 const MainLayout = ({ children }: MainLayoutProps) => {

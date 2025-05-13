@@ -3,36 +3,39 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  // 入口文件
+  // Entry file
   entry: './src/index.tsx',
 
-  // 打包输出配置
+  // Output configuration
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
 
-  // 模式：开发调试时建议用 development
+  // Mode: use 'development' during local development
   mode: 'development',
 
-  // 开启 source-map 方便调试（可以看到 .tsx/.ts 源码行号）
+  // Enable source maps for easier debugging
   devtool: 'source-map',
 
-  // 本地开发服务器配置
+  // Development server settings
   devServer: {
     static: './public',
-    historyApiFallback: true, // 支持 React Router
+    historyApiFallback: true, // Supports React Router
     port: 3000,
     open: true,
   },
 
-  // 模块文件解析
+  // Module resolution
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'), // Alias '@' to 'src' directory
+    },
   },
 
-  // 模块加载器配置
+  // Module loaders
   module: {
     rules: [
       {
@@ -52,11 +55,11 @@ module.exports = {
     ],
   },
 
-  // 插件配置
+  // Plugins
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new Dotenv(), // 加载 .env 环境变量
+    new Dotenv(), // Load environment variables from .env
   ],
 };

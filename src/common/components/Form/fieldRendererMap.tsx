@@ -14,21 +14,21 @@ import {
 } from '@mui/material';
 import { Controller } from 'react-hook-form';
 import { FormField } from '../../types/common';
-import { buildValidationRules } from './validation';
 
-/**
- * Field type to renderer mapping
- */
 export const fieldRendererMap: Record<
   FormField['type'],
-  (field: FormField, control: any) => React.ReactNode
+  (
+    field: FormField,
+    control: any,
+    rules?: Record<string, any>
+  ) => React.ReactNode
 > = {
-  text: (field, control) => (
+  text: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <TextField
           {...controllerField}
@@ -42,12 +42,12 @@ export const fieldRendererMap: Record<
     />
   ),
 
-  select: (field, control) => (
+  select: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <TextField
           {...controllerField}
@@ -59,8 +59,8 @@ export const fieldRendererMap: Record<
           helperText={fieldState.error?.message}
         >
           {field.options?.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
             </MenuItem>
           ))}
         </TextField>
@@ -68,12 +68,12 @@ export const fieldRendererMap: Record<
     />
   ),
 
-  textarea: (field, control) => (
+  textarea: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <Box marginY={2}>
           <Typography>{field.label}</Typography>
@@ -92,31 +92,36 @@ export const fieldRendererMap: Record<
     />
   ),
 
-  file: (field, control) => (
-  <Controller
-    key={field.name}
-    name={field.name}
-    control={control}
-    render={({ field: controllerField }) => (
-      <TextField
-        type="file"
-        fullWidth
-        margin="normal"
-        onChange={(e) => {
-          const target = e.target as HTMLInputElement;
-          controllerField.onChange(target.files?.[0]);
-        }}
-      />
-    )}
-  />
-),
-
-  checkbox: (field, control) => (
+  file: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
+      render={({ field: controllerField, fieldState }) => (
+        <>
+          <TextField
+            type="file"
+            fullWidth
+            margin="normal"
+            error={!!fieldState.error}
+            helperText={fieldState.error?.message}
+            onChange={(e) => {
+              const target = e.target as HTMLInputElement;
+              controllerField.onChange(target.files?.[0]);
+            }}
+          />
+        </>
+      )}
+    />
+  ),
+
+  checkbox: (field, control, rules) => (
+    <Controller
+      key={field.name}
+      name={field.name}
+      control={control}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <FormControlLabel
           control={
@@ -131,22 +136,22 @@ export const fieldRendererMap: Record<
     />
   ),
 
-  radio: (field, control) => (
+  radio: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <FormControl margin="normal" error={!!fieldState.error}>
           <FormLabel>{field.label}</FormLabel>
           <RadioGroup {...controllerField}>
             {field.options?.map((option) => (
               <FormControlLabel
-                key={option}
-                value={option}
+                key={option.value}
+                value={option.value}
                 control={<Radio />}
-                label={option}
+                label={option.label}
               />
             ))}
           </RadioGroup>
@@ -159,12 +164,13 @@ export const fieldRendererMap: Record<
       )}
     />
   ),
-  date: (field, control) => (
+
+  date: (field, control, rules) => (
     <Controller
       key={field.name}
       name={field.name}
       control={control}
-      rules={buildValidationRules(field)}
+      rules={rules}
       render={({ field: controllerField, fieldState }) => (
         <TextField
           {...controllerField}
@@ -179,5 +185,4 @@ export const fieldRendererMap: Record<
       )}
     />
   ),
-  
 };

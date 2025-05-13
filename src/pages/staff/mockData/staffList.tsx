@@ -1,34 +1,41 @@
 
 import { Staff } from '../types/Staff'
-export const staffList: Staff[] = [
-  {
-    id: '1',
-    name: 'Alice Johnson',
-    email: 'alice@company.com',
-    role: 1,
-    status: 'active',
-    lastLogin: '2024-05-10 09:15',
-    storageUsed: '2.3 GB / 10 GB',
-    device: 'MacBook Pro',
-  },
-  {
-    id: '2',
-    name: 'Bob Smith',
-    email: 'bob@company.com',
-    role: 2,
-    status: 'inactive',
-    lastLogin: '2024-05-08 14:50',
-    storageUsed: '1.1 GB / 10 GB',
-    device: 'iPhone 13',
-  },
-];
+import {BASE_URL} from '@/common/constants'
+
+// mock data
+export const staffList: Staff[] = Array.from({ length: 20 }, (_, i) => {
+  const id = (i + 1).toString();
+  const name = `User ${i + 1}`;
+  const email = `user${i + 1}@company.com`;
+  const role = Math.floor(Math.random() * 3) + 1; // 1 ~ 3
+  const status = Math.random() > 0.3 ? 'active' : 'inactive';
+  const lastLogin = `2024-05-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')} ${
+    String(Math.floor(Math.random() * 23)).padStart(2, '0')
+  }:${String(Math.floor(Math.random() * 59)).padStart(2, '0')}`;
+  const storageUsed = `${(Math.random() * 10).toFixed(1)} GB / 10 GB`;
+  const devices = ['MacBook Pro', 'iPhone 13', 'Windows PC', 'iPad Pro'];
+  const device = devices[Math.floor(Math.random() * devices.length)];
+
+  return {
+    id,
+    name,
+    email,
+    role,
+    status,
+    lastLogin,
+    storageUsed,
+    device,
+  };
+});
+
 
 // mock data fetch
 export const fetchStaffList = async (): Promise<Staff[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(staffList);
-    }, 5500);
+    }, 500);
   });
 };
+
 

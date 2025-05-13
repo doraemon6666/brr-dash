@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, CircularProgress, Box } from '@mui/material';
+import { Paper } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import Dashboardcard from './Dashboardcard'
 import { fetchTicketStats } from '../mockData/ticketStats'
 import { DashboardcardProps } from '../types/DashboardCard';
@@ -15,12 +16,15 @@ export default function Dashboard() {
     },[])
 
     return (
-        <div className='dashboard'>
-           {
-             stats.map((item, index) => (
-                <Dashboardcard {...item} key={index}/>
-              ))
-           }
-        </div>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {
+            stats.map((item, index) => (
+                <Grid size={{ xs: 12, sm: 12, md: 6 }}>
+                    <Dashboardcard {...item} key={index}/>
+                </Grid>
+                
+            ))
+        }
+    </Grid>
     );
 }

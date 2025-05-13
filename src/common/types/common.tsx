@@ -1,3 +1,5 @@
+import { FieldValues } from 'react-hook-form';
+import {SnackbarOrigin} from '@mui/material';
 // current user
 export interface User {
   id: string;
@@ -29,6 +31,9 @@ export interface CommonTableProps<T>{
   defaultRowsPerPage?: number;
   error?: boolean;
   loading?: boolean;
+  onAddClick?: () => void; // add callback
+  addButtonLabel?: string; // button label
+  renderActions?: (row: T) => React.ReactNode; // action button
 }
 
 // Form 
@@ -37,12 +42,26 @@ export interface FormField {
   label: string;
   type: 'text' | 'select' | 'textarea' | 'file' | 'checkbox' | 'radio' | 'date';
   required?: boolean;
-  options?: string[];
+  options?: Array<{ label: string; value: string | number }>;
   validation?: Record<string, any>; // e.g. { minLength: 3 }
 }
 
-export interface BaseFormProps<T> {
+export interface BaseFormProps<T extends FieldValues> {
   fields: FormField[];
-  initialValues: Partial<T>;
+  initialValues?: T;
   onSubmit: (data: T) => void;
+  setFormSubmit?: (submit: () => void) => void;
 }
+
+export type SnackbarSeverity = 'success' | 'error' | 'warning' | 'info';
+
+export interface SnackbarProps {
+  open: boolean;
+  message: string;
+  severity?: SnackbarSeverity;
+  onClose: () => void;
+  autoHideDuration?: number;
+  anchorOrigin?: SnackbarOrigin;
+}
+
+export type UploadApi = (file: File) => Promise<{ success: boolean; url?: string; error?: string }>;

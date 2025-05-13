@@ -1,5 +1,5 @@
 
-import { StaffRoleEnum } from '../../../common/constants'
+import { StaffRoleEnum } from '@/common/constants'
 
 export interface Staff {
   id: string;

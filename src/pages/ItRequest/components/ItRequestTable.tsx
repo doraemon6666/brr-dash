@@ -1,62 +1,64 @@
 
 
-import CommonTable  from '../../../common/components/CommonTable'
-import { Staff } from '../types/Staff'
-import { StaffRoleEnum,StaffRoleMap } from '../../../common/constants'
-import {Column} from '../../../common/types/common'
-import { Chip, CircularProgress, Box } from '@mui/material';
+import CommonTable  from '@/common/components/CommonTable'
 import { useEffect, useState } from 'react';
-import {fetchItRequestTableList} from '../mockData/requestTableList'
-
-const staffColumns: Column<Staff>[] = [
-    { id: 'name', lable: 'Name' },
-    { id: 'email', lable: 'Email' },
-    {
-      id: 'role',
-      lable: 'Role',
-      render: (value) => StaffRoleMap[value as number] || 'Unknown',
-    },
-    {
-      id: 'status',
-      lable: 'Status',
-      render: (value) => (
-        <Chip
-          label={value === 'active' ? 'Active' : 'Inactive'}
-          color={value === 'active' ? 'success' : 'default'}
-          size="small"
-        />
-      ),
-    },
-    { id: 'lastLogin', lable: 'Last Login' },
-    { id: 'storageUsed', lable: 'Storage Used' },
-    { id: 'device', lable: 'Device' },
-  ];
-function ItRequestTable() {
-    const [staffList,setStaffList] = useState<Staff[]>([]);
+import{itRequestColumns} from '../config/itRequestColumns'
+import {fetchItRequestList,deleteItRequest} from '../mockData/requestTableList'
+import {ITRequest,ITRequestTableProps} from '../types/ITRequest'
+import { useSnackbarContext } from '@/common/contexts/snackbar';
+import { Button } from '@mui/material';
+function ItRequestTable({ onAddClick,refreshFlag }: ITRequestTableProps) {
+    const [itRequestList,setItRequestList] = useState<ITRequest[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
+    const { showSnackbar } = useSnackbarContext();
+    const loadData = async () => {
+        try {
+          const res = await fetchItRequestList();
+          setItRequestList(res);
+        } catch (err) {
+          console.error('Failed to fetch staff list:', err);
+          setError(true);
+        } finally {
+          setLoading(false);
+        }
+      };
     useEffect(() => {
-        const loadData = async () => {
-          try {
-            const res = await fetchItRequestTableList();
-            setStaffList(res);
-          } catch (err) {
-            console.error('Failed to fetch staff list:', err);
-            setError(true);
-          } finally {
-            setLoading(false);
-          }
-        };
         loadData();
-      }, []);
+    }, [refreshFlag]);
+
+    const handleDelete = async (data:ITRequest) => {
+      console.log("🚀 ~ handleDelete ~ data:", data)
+      try {
+        const res = await deleteItRequest(data?.id)
+        if(res.success){
+          // reload table data
+          showSnackbar('Delete successfully!', 'success');
+          loadData();
+        } else {
+          showSnackbar(res.error ?? "Deletion failed. Please try again.", 'error');
+        }
+
+      }
+      catch(err){
+        showSnackbar((err as Error).message, 'error');
+      }
+      
+    }
 
     return (
-        <CommonTable 
-            columns={staffColumns} 
-            data={staffList} 
+        <CommonTable<ITRequest> 
+            columns={itRequestColumns} 
+            data={itRequestList} 
             error={error} 
-            loading={loading} />
+            loading={loading}
+            onAddClick={onAddClick}
+            renderActions={(row) => (
+              <>
+                <Button size="small" onClick={() => {}}>Edit</Button>
+                <Button size="small" color="error" onClick={()=>handleDelete(row)}>Delete</Button>
+              </>
+            )} />
     );
   }
   export default ItRequestTable

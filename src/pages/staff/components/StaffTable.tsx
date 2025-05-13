@@ -1,9 +1,9 @@
 
 
-import CommonTable  from '../../../common/components/CommonTable'
+import CommonTable  from '@/common/components/CommonTable'
 import { Staff } from '../types/Staff'
-import { StaffRoleEnum,StaffRoleMap } from '../../../common/constants'
-import {Column} from '../../../common/types/common'
+import { StaffRoleEnum,StaffRoleMap } from '@/common/constants'
+import {Column} from '@/common/types/common'
 import { Chip, CircularProgress, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import {fetchStaffList} from '../mockData/staffList'

@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, CircularProgress, Avatar,Typography } from '@mui/material';
-import { useCurrentUser } from '../../../common/contexts/UserContext'; 
+import { useCurrentUser } from '@/common/contexts/UserContext'; 
 
 
 const WelcomeTip = () => {
