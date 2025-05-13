@@ -7,7 +7,7 @@ export const staffList: Staff[] = Array.from({ length: 20 }, (_, i) => {
   const id = (i + 1).toString();
   const name = `User ${i + 1}`;
   const email = `user${i + 1}@company.com`;
-  const role = Math.floor(Math.random() * 3) + 1; // 1 ~ 3
+  const role = Math.floor(Math.random() * 2) + 1; // 1 ~ 3
   const status = Math.random() > 0.3 ? 'active' : 'inactive';
   const lastLogin = `2024-05-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')} ${
     String(Math.floor(Math.random() * 23)).padStart(2, '0')

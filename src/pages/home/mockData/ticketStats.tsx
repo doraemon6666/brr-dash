@@ -44,6 +44,6 @@ export function fetchTicketStats(): Promise<DashboardcardProps[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockTicketStats);
-    }, 2500); 
+    }, 500); 
   });
 }

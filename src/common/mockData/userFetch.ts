@@ -8,7 +8,7 @@ export const mockCurrentUser: User = {
     role: 'admin',
   };
 export async function fetchCurrentUser() {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     // user data 
     return mockCurrentUser
   }

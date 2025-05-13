@@ -33,7 +33,7 @@ const Dashboardcard = ({title,subTitle,value,progress,icon,bgColor} : Dashboardc
                             justifyContent: 'center',
                             }}
                         >
-                            <Typography variant="caption" component="div" color="text.secondary">
+                            <Typography variant="caption" component="div" color="text.secondary" sx={{ fontSize: '30px' }}>
                                 {value}
                             </Typography>
                         </Box>
