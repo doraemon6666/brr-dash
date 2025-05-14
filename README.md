@@ -27,7 +27,7 @@ npm run test
 npm run test:coverage
 ```
 
-4. code format
+4. ESLint
 
 ```
 npm run lint
