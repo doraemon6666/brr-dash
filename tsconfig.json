@@ -18,9 +18,10 @@
         "@components/*": ["src/components/*"],
         "@pages/*": ["src/pages/*"],
         "@/*": ["src/*"]
-      }
+      },
+      "types": ["jest","node", "@testing-library/jest-dom"]
     },
-    "include": ["src"],
+    "include": ["src", "jest.setup.ts"],
     "exclude": ["node_modules", "dist"]
   }
   

@@ -11,7 +11,7 @@ export function useUploadFile(uploadApi: UploadApi) {
         setUploading(true);
 
         try {
-        const res = await uploadApi(file);
+            const res = await uploadApi(file);
 
         if (res.success && res.url) {
             return res.url;
@@ -20,11 +20,11 @@ export function useUploadFile(uploadApi: UploadApi) {
             return null;
         }
         } catch (error) {
-        const msg = error instanceof Error ? error.message : 'Unknown error';
-        showSnackbar(`Upload error: ${msg}`, 'error');
-        return null;
+            const msg = error instanceof Error ? error.message : 'Unknown error';
+            showSnackbar(`Upload error: ${msg}`, 'error');
+            return null;
         } finally {
-        setUploading(false);
+            setUploading(false);
         }
     };
 

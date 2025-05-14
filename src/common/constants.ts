@@ -1,10 +1,11 @@
 export const BASE_URL = 'http://localhost:3001';
-
+//TODO
 export const ROUTES = {
     HOME: '/',
     STAFF: '/staff',
     ITREQUEST: '/itRequest',
 };
+
 export enum StaffRoleEnum {
     Admin = 1,
     Staff = 2

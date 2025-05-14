@@ -2,25 +2,10 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-// TODO right icons
-import {
-  Home as HomeIcon,
-  People as PeopleIcon,
-  Assignment as AssignmentIcon,
-  ListAlt as ListAltIcon,
-  SupportAgent as SupportAgentIcon,
-} from '@mui/icons-material';
 
 import { NavigationItem,MainLayoutProps,ToolpadRouter } from '../types/layout'
+import { menuItems } from '../config/navigation'
 
-// TODO data
-const menuItems : NavigationItem[] = [
-  { segment: '', title: 'Dashboard', icon: <HomeIcon /> },
-  { segment: 'staff', title: 'Staff', icon: <PeopleIcon /> },
-  { segment: 'itRequest', title: 'IT Request', icon: <AssignmentIcon /> },
-  { segment: 'tickets', title: 'Tickets', icon: <AssignmentIcon /> },
-  { segment: 'todo', title: 'To-Do', icon: <AssignmentIcon /> },
-];
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation();
@@ -39,14 +24,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       navigate(url);
     },
   };
-
-  interface DemoProps {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * Remove this when copying and pasting into your project.
-     */
-    window?: () => Window;
-  }
  
   return (
     <AppProvider router={router} navigation={menuItems}>

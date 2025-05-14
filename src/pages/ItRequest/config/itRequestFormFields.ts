@@ -4,8 +4,8 @@ import {FormField} from '@/common/types/common'
 export const itRequestFormFields: FormField[] = [
   { name: 'title', label: 'Title', type: 'text', required: true },
   {
-    name: 'IssueType',
-    label: 'IssueType',
+    name: 'issueType',
+    label: 'issueType',
     type: 'select',
     required: true,
     options: Object.entries(ItRequestIssueTypeMap).map(([value, label]) => ({

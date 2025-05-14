@@ -18,12 +18,6 @@ export default function CommonForm<T extends FieldValues>({
   });
 
     const { control } = useFormContext();
-//   useEffect(() => {
-//     if (setFormSubmit) {
-//         setFormSubmit(handleSubmit(onSubmit));
-//     }
-//   }, [setFormSubmit, handleSubmit, onSubmit]);
-
 
   return (
     <form 
@@ -34,12 +28,6 @@ export default function CommonForm<T extends FieldValues>({
             const rules = buildValidationRules(field);  
             return renderFn(field, control, rules); 
         })}
-
-        {/* <Box mt={2}>
-            <Button type="submit" variant="contained">
-            Submit
-            </Button>
-        </Box> */}
     </form>
   );
 }

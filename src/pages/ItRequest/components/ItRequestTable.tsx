@@ -12,6 +12,7 @@ function ItRequestTable({ onAddClick,refreshFlag }: ITRequestTableProps) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const { showSnackbar } = useSnackbarContext();
+
     const loadData = async () => {
         try {
           const res = await fetchItRequestList();
@@ -22,7 +23,7 @@ function ItRequestTable({ onAddClick,refreshFlag }: ITRequestTableProps) {
         } finally {
           setLoading(false);
         }
-      };
+    };
     useEffect(() => {
         loadData();
     }, [refreshFlag]);

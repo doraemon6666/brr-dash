@@ -15,19 +15,19 @@ import {
   useMediaQuery,
   Button
 } from '@mui/material';
-import { Column,CommonTableProps } from '../types/common'
+import { CommonTableProps } from '../types/common'
 
 function CommonTable<T extends {id:string}>({
     columns,
     data,
-    rowsPerPageOptions = [10, 20],
+    rowsPerPageOptions = [5,10, 20],
     defaultRowsPerPage = 10,
     error = false,
     loading = false,
     onAddClick,
     addButtonLabel = "+ Add",
     renderActions
-}:CommonTableProps<T>){
+} : CommonTableProps<T>){
     const [page,setPage] = useState(0);
     const [rowPerPage,setRowPerPage] = useState(defaultRowsPerPage);
 
@@ -46,6 +46,7 @@ function CommonTable<T extends {id:string}>({
 
     const handleChangeRowPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setRowPerPage(parseInt(event.target.value,10));
+      setPage(0);
     }
 
     const paginatedData = data.slice(

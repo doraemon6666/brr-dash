@@ -11,14 +11,14 @@ import { DashboardcardProps } from '../types/DashboardCard';
 export const mockTicketStats: DashboardcardProps[] = [
   {
     title: 'Open Tickets',
-    value: 80,
+    value: 5,
     progress: 60,
     icon: <AssignmentIcon />,
     bgColor:'#B6CCFF'
   },
   {
     title: 'Pending Tasks',
-    value: 60,
+    value: 30,
     progress: 45,
     icon: <AccessAlarmIcon />,
     bgColor:'#FFE8A1'
@@ -31,8 +31,8 @@ export const mockTicketStats: DashboardcardProps[] = [
     bgColor:'#C8E6C9'
   },
   {
-    title: 'Avg. Response Time',
-    value: 90,
+    title: 'Requests',
+    value: 20,
     progress: 80,
     icon: <BugReportIcon />,
     bgColor:'#C5CAE9'
