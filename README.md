@@ -2,6 +2,13 @@
 
 A modern internal team dashboard for BRR Media, built with React, TypeScript, MUI, and Webpack. Features staff directory, IT request system, ticket tracking, and personal task management.
 
+## Clone the project
+
+```
+git clone https://github.com/doraemon6666/brr-dash
+cd brr-dash
+```
+
 ## Run the application
 
 1. Install dependencies if you have not yet
