@@ -1,7 +1,4 @@
-
-import StaffTable from "./StaffTable";
-
-
+import StaffTable from './StaffTable';
 
 export default function Staff() {
   return (

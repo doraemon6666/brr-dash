@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Dashboardcard from './Dashboardcard';
+
 import BugReportIcon from '@mui/icons-material/BugReport';
 
 export default {
@@ -8,10 +10,5 @@ export default {
 };
 
 export const Default = () => (
-  <Dashboardcard
-    title="Open Tickets"
-    value={12}
-    progress={75}
-    icon={<BugReportIcon />}
-  />
+  <Dashboardcard title="Open Tickets" value={12} progress={75} icon={<BugReportIcon />} />
 );

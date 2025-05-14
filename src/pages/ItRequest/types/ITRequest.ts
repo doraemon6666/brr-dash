@@ -1,14 +1,12 @@
-import {ItRequestPriorityEnum,ItRequestStatusEnum} from '@/common/constants'
-
-
+import { ItRequestStatusEnum } from '@/common/constants';
 
 export interface ITRequestFormValues {
-  id?: string; 
+  id?: string;
   title: string;
   issueType: number;
   description?: string;
-  priority: number; 
-  attachment?: File | null; 
+  priority: number;
+  attachment?: File | null;
 }
 
 export interface SubmitPayload {
@@ -19,22 +17,21 @@ export interface SubmitPayload {
   priority: number;
   attachment: string; // file upload url
   status?: ItRequestStatusEnum;
-  createdAt?:string
+  createdAt?: string;
 }
 
 export interface ITRequest extends SubmitPayload {
-  id: string;         
+  id: string;
   createdAt: string;
-  // status: number;
 }
 
 export interface AddItRequestProps {
-    open:boolean,
-    onClose: () => void;
-    onSuccess: () => void; 
+  open: boolean;
+  onClose: () => void;
+  onSuccess: () => void;
 }
 
 export interface ITRequestTableProps {
   onAddClick: () => void;
-  refreshFlag:boolean
+  refreshFlag: boolean;
 }

@@ -1,19 +1,13 @@
 export const BASE_URL = 'http://localhost:3001';
-//TODO
-export const ROUTES = {
-    HOME: '/',
-    STAFF: '/staff',
-    ITREQUEST: '/itRequest',
-};
 
 export enum StaffRoleEnum {
-    Admin = 1,
-    Staff = 2
+  Admin = 1,
+  Staff = 2,
 }
-  
+
 export const StaffRoleMap: Record<number, string> = {
-    [StaffRoleEnum.Admin]: 'Admin',
-    [StaffRoleEnum.Staff]: 'Staff'
+  [StaffRoleEnum.Admin]: 'Admin',
+  [StaffRoleEnum.Staff]: 'Staff',
 };
 
 export enum ItRequestPriorityEnum {
@@ -54,3 +48,17 @@ export const ItRequestIssueTypeMap: Record<number, string> = {
   [ItRequestIssueTypeEnum.Other]: 'Other',
 };
 
+export const SKELETON_BG_COLOR = '#f0f0f0';
+
+export const WELCOME_MESSAGE = 'Welcome Back ';
+
+export const STATUS_MAP = {
+  active: {
+    label: 'Active',
+    color: 'success',
+  },
+  inactive: {
+    label: 'Inactive',
+    color: 'default',
+  },
+} as const;

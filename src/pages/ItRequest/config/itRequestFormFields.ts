@@ -1,5 +1,6 @@
-import {ItRequestPriorityMap,ItRequestIssueTypeMap} from '@/common/constants'
-import {FormField} from '@/common/types/common'
+import { ItRequestPriorityMap, ItRequestIssueTypeMap } from '@/common/constants';
+
+import { FormField } from '@/common/types/common';
 
 export const itRequestFormFields: FormField[] = [
   { name: 'title', label: 'Title', type: 'text', required: true },
@@ -10,7 +11,7 @@ export const itRequestFormFields: FormField[] = [
     required: true,
     options: Object.entries(ItRequestIssueTypeMap).map(([value, label]) => ({
       label,
-      value: Number(value), 
+      value: Number(value),
     })),
   },
   { name: 'description', label: 'Description', type: 'text' },
@@ -21,12 +22,12 @@ export const itRequestFormFields: FormField[] = [
     required: true,
     options: Object.entries(ItRequestPriorityMap).map(([value, label]) => ({
       label,
-      value: Number(value), 
+      value: Number(value),
     })),
   },
   {
     name: 'attachment',
     label: 'Upload File',
-    type: 'file', 
+    type: 'file',
   },
 ];

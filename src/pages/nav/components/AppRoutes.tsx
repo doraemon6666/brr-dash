@@ -1,8 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
+
 import Home from '../../home/components/Home';
+
 import Staff from '../../staff/components/Staff';
-import ITRequest from '../../itRequest/components/ITRequest'
-import { ROUTES } from '@/common/constants';
+
+import ITRequest from '../../itRequest/components/ITRequest';
+
+import { ROUTES } from '@/route/router';
 
 export default function AppRoutes() {
   return (

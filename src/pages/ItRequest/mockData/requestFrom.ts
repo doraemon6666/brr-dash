@@ -1,46 +1,31 @@
-import {BASE_URL} from '@/common/constants'
-import {ITRequest,SubmitPayload} from '../types/ITRequest'
+import { BASE_URL } from '@/common/constants';
+
+import { ITRequest, SubmitPayload } from '../types/ITRequest';
 // upload file
-export async function mockUploadFile(file: File): Promise<
-  | { success: true; url: string }
-  | { success: false; error: string }
-> {
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
+export async function mockUploadFile(
+  file: File
+): Promise<{ success: true; url: string } | { success: false; error: string }> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (!file) {
+        resolve({ success: false, error: 'No file provided.' });
 
-    const response = await fetch(`${BASE_URL}/upload`, {
-      method: 'POST',
-      body: formData,
-    });
+        return;
+      }
 
-    if (!response.ok) {
-      return {
-        success: false,
-        error: `Upload failed. Status: ${response.status}`,
-      };
-    }
+      // Create a mock URL
+      const fakeUrl = URL.createObjectURL(file);
 
-    const data = await response.json();
-
-    if (!data.url) {
-      return {
-        success: false,
-        error: 'Upload response missing URL.',
-      };
-    }
-
-    return { success: true, url: data.url };
-  } catch (err) {
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : 'Unknown error',
-    };
-  }
+      resolve({
+        success: true,
+        url: fakeUrl,
+      });
+    }, 500);
+  });
 }
 
 // itRequest submit
-export const mockSubmitRequest =  async (
+export const mockSubmitRequest = async (
   data: SubmitPayload
 ): Promise<{ success: boolean; data: ITRequest }> => {
   const res = await fetch(`${BASE_URL}/requests`, {
@@ -59,5 +44,6 @@ export const mockSubmitRequest =  async (
   }
 
   const result = await res.json();
+
   return { success: true, data: result };
 };

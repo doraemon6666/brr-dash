@@ -5,14 +5,7 @@ export interface Option {
   value: string | number;
 }
 
-export type FormFieldType = 
-  | 'text'
-  | 'select'
-  | 'textarea'
-  | 'file'
-  | 'checkbox'
-  | 'radio'
-  | 'date';
+export type FormFieldType = 'text' | 'select' | 'textarea' | 'file' | 'checkbox' | 'radio' | 'date';
 
 export interface FormField {
   name: string;

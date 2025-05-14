@@ -1,8 +1,13 @@
 import React from 'react';
+
 import { render, screen, fireEvent } from '@testing-library/react';
+
 import userEvent from '@testing-library/user-event';
+
 import CommonTable from '../common/components/CommonTable';
+
 import { Column } from '../common/types/common';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 // mock useMediaQuery
@@ -48,9 +53,8 @@ describe('CommonTable', () => {
 
   test('calls onAddClick when button is clicked', () => {
     const handleAdd = jest.fn();
-    render(
-      <CommonTable columns={mockColumns} data={mockData} onAddClick={handleAdd} />
-    );
+
+    render(<CommonTable columns={mockColumns} data={mockData} onAddClick={handleAdd} />);
     fireEvent.click(screen.getByText('+ Add'));
     expect(handleAdd).toHaveBeenCalled();
   });
@@ -66,7 +70,7 @@ describe('CommonTable', () => {
     expect(screen.getAllByText('Action')).toHaveLength(mockData.length);
   });
 
-  test('pagination shows next page data', async() => {
+  test('pagination shows next page data', async () => {
     const pageData = Array.from({ length: 12 }, (_, i) => ({
       id: `${i}`,
       name: `User ${i}`,
@@ -74,9 +78,7 @@ describe('CommonTable', () => {
       email: `user${i}@test.com`,
     }));
 
-    render(
-      <CommonTable columns={mockColumns} data={pageData} defaultRowsPerPage={5} />
-    );
+    render(<CommonTable columns={mockColumns} data={pageData} defaultRowsPerPage={5} />);
 
     expect(await screen.findByText((text) => text.includes('User 0'))).toBeInTheDocument();
 
@@ -105,6 +107,7 @@ describe('CommonTable', () => {
     expect(screen.getByText('User 5')).toBeInTheDocument();
 
     const select = screen.getByLabelText(/rows per page/i);
+
     await userEvent.click(select);
     await userEvent.click(screen.getByRole('option', { name: '10' }));
 
@@ -115,11 +118,11 @@ describe('CommonTable', () => {
 
   test('hides columns on small screen', () => {
     // mock small screen
-    (useMediaQuery as jest.Mock).mockReturnValue(true); 
+    (useMediaQuery as jest.Mock).mockReturnValue(true);
     render(<CommonTable columns={mockColumns} data={mockData} />);
 
     expect(screen.getByText('Name')).toBeInTheDocument();
     expect(screen.getByText('Age')).toBeInTheDocument();
-    expect(screen.queryByText('Email')).toBeNull(); 
+    expect(screen.queryByText('Email')).toBeNull();
   });
 });

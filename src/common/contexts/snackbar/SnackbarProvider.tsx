@@ -1,8 +1,10 @@
-// src/contexts/snackbar/SnackbarProvider.tsx
 import React, { useState, useCallback } from 'react';
-import { Snackbar, Alert, SnackbarOrigin } from '@mui/material';
+
+import { Snackbar, Alert } from '@mui/material';
+
 import { SnackbarContext } from './SnackbarContext';
-import {SnackbarSeverity} from '../../types/common'
+
+import { SnackbarSeverity } from '../../types/common';
 export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');

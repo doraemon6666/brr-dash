@@ -1,5 +1,7 @@
 import { FieldValues } from 'react-hook-form';
-import {SnackbarOrigin} from '@mui/material';
+
+import { SnackbarOrigin } from '@mui/material';
+
 // current user
 export interface User {
   id: string;
@@ -16,17 +18,17 @@ export interface UserContextValue {
   error: Error | null;
 }
 
-// table 
+// table
 export interface Column<T = any> {
   id: keyof T;
   lable: string;
-  render?:(value:any,row:T) => React.ReactNode;
+  render?: (value: any, row: T) => React.ReactNode;
   hideOnSmallScreen?: boolean;
 }
 
-export interface CommonTableProps<T>{
-  columns:Column<T>[],
-  data:T[],
+export interface CommonTableProps<T> {
+  columns: Column<T>[];
+  data: T[];
   rowsPerPageOptions?: number[];
   defaultRowsPerPage?: number;
   error?: boolean;
@@ -36,7 +38,7 @@ export interface CommonTableProps<T>{
   renderActions?: (row: T) => React.ReactNode; // action button
 }
 
-// Form 
+// Form
 export interface FormField {
   name: string;
   label: string;

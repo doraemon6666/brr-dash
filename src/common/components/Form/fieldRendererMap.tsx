@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   TextField,
   MenuItem,
@@ -12,16 +13,14 @@ import {
   FormLabel,
   FormControl,
 } from '@mui/material';
+
 import { Controller } from 'react-hook-form';
+
 import { FormField } from '../../types/common';
 
 export const fieldRendererMap: Record<
   FormField['type'],
-  (
-    field: FormField,
-    control: any,
-    rules?: Record<string, any>
-  ) => React.ReactNode
+  (field: FormField, control: any, rules?: Record<string, any>) => React.ReactNode
 > = {
   text: (field, control, rules) => (
     <Controller
@@ -108,6 +107,7 @@ export const fieldRendererMap: Record<
             helperText={fieldState.error?.message}
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
+
               controllerField.onChange(target.files?.[0]);
             }}
           />
@@ -122,14 +122,9 @@ export const fieldRendererMap: Record<
       name={field.name}
       control={control}
       rules={rules}
-      render={({ field: controllerField, fieldState }) => (
+      render={({ field: controllerField }) => (
         <FormControlLabel
-          control={
-            <Checkbox
-              {...controllerField}
-              checked={!!controllerField.value}
-            />
-          }
+          control={<Checkbox {...controllerField} checked={!!controllerField.value} />}
           label={field.label}
         />
       )}

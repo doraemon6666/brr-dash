@@ -1,9 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
+
 import { useUploadFile } from '../common/hooks/useUploadFile';
+
 import type { UploadApi } from '../common/types/common';
 
 // mock SnackbarContext
 const mockShowSnackbar = jest.fn();
+
 jest.mock('../common/contexts/snackbar/SnackbarContext.tsx', () => ({
   useSnackbarContext: () => ({
     showSnackbar: mockShowSnackbar,
@@ -47,10 +50,7 @@ describe('useUploadFile', () => {
     });
 
     expect(output).toBeNull();
-    expect(mockShowSnackbar).toHaveBeenCalledWith(
-      'Upload failed: Upload failed',
-      'error'
-    );
+    expect(mockShowSnackbar).toHaveBeenCalledWith('Upload failed: Upload failed', 'error');
   });
 
   test('throws error and shows fallback message', async () => {
@@ -64,9 +64,6 @@ describe('useUploadFile', () => {
     });
 
     expect(output).toBeNull();
-    expect(mockShowSnackbar).toHaveBeenCalledWith(
-      'Upload error: Network error',
-      'error'
-    );
+    expect(mockShowSnackbar).toHaveBeenCalledWith('Upload error: Network error', 'error');
   });
 });
